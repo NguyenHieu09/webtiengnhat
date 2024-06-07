@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+
+}
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-primary-color: #f3f3f3;
+    --background-dark-grey: #191D2B;
+    --border-color: #2e344e;
+    --background-light-color: #F1F1F1;
+    --background-light-color-2: rgba(3, 127, 255, 0.3);
+    --white-color: #FFF;
+    --font-light-color: #a4acc4;
+    --font-dark-color: #313131;
+    --font-dark-color-2: #151515;
+    --sidebar-dark-color: #191D2B;
+    --scrollbar-bg-color: #383838;
+    --scrollbar-thumb-color: #6b6b6b;
+    --scrollbar-width: 12px;
+}
+
+
+.img-logo {
+    width: 10vh;
+    height: auto;
+}
+
+
+.navbar-nav .nav-item:hover .nav-link {
+    color: #FF7F3E;
+
+}
+
+
+.nav-link {
+    font-weight: 700;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #FFDA78;
+
+}
+
+.navbar {
+    justify-content: space-between;
+    align-items: center;
+    /* height: 10vh; */
+}
+
+.nav-item {
+    margin: 0 1rem;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+
+}
+
+.footer {
+    background-color: #2A629A;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 3vh;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.social-link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: #f0f0f0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 35px;
+
+}
+
+
+.social-link i {
+    vertical-align: middle;
+    font-size: 24px;
+    /* Kích thước icon */
+}
+
+.social-link:hover {
+    background-color: #827676;
+    /* Màu nhạt dần khi hover */
+}
+
+.facebook-bg {
+    background-color: #3b5998;
+}
+
+.envelope-bg {
+    background-color: #f7685b;
+}
+
+.youtube-bg {
+    background-color: #c4302b;
+}
+
+.footer p {
+    font-size: 14px;
+    /* hoặc bất kỳ giá trị nào khác phù hợp với thiết kế của bạn */
+    margin-bottom: 5px;
+    /* hoặc bạn có thể sử dụng padding-bottom tùy vào ý định của bạn */
+}
