@@ -131,3 +131,20 @@ body {
     font-size: 14px;
     margin-bottom: 5px;
 }
+
+.bordered-div {
+    border: 2px dashed #FF7F3E;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f4e0ab;
+}
+
+.custom-button {
+    background-color: #003285;
+    color: white;
+}
+
+.custom-button:hover {
+    background-color: #2A629A;
+    color: white;
+}
