@@ -36,12 +36,12 @@ $(document).ready(function () {
     $('#change-to-ja').click(() => changeLanguage('ja'));
 });
 
-// Function to change language and update the UI
+
 function changeLanguage(language) {
-    // console.log('Changing language to:', language);
+
     i18next.changeLanguage(language, () => {
         $('body').localize();
-        // console.log('Language changed to:', language);
+
     });
 }
 

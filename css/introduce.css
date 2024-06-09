@@ -12,25 +12,6 @@
 
 }
 
-:root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --background-primary-color: #f3f3f3;
-    --background-dark-grey: #191D2B;
-    --border-color: #2e344e;
-    --background-light-color: #F1F1F1;
-    --background-light-color-2: rgba(3, 127, 255, 0.3);
-    --white-color: #FFF;
-    --font-light-color: #a4acc4;
-    --font-dark-color: #313131;
-    --font-dark-color-2: #151515;
-    --sidebar-dark-color: #191D2B;
-    --scrollbar-bg-color: #383838;
-    --scrollbar-thumb-color: #6b6b6b;
-    --scrollbar-width: 12px;
-}
-
-
 .img-logo {
     width: 10vh;
     height: auto;
@@ -43,7 +24,7 @@
 }
 
 
-.nav-link {
+.navbar-nav li>a {
     font-weight: 700;
 }
 
@@ -62,29 +43,20 @@
     margin: 0 1rem;
 }
 
-.carousel-item img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-
+html,
+body {
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .footer {
     background-color: #2A629A;
     color: #ffffff;
     text-align: center;
-    margin-top: 3vh;
-
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
-}
-
-html,
-body {
-    height: 100%;
-    margin: 0;
+    margin-top: auto;
     display: flex;
     flex-direction: column;
 }
@@ -130,7 +102,5 @@ body {
 
 .footer p {
     font-size: 14px;
-    /* hoặc bất kỳ giá trị nào khác phù hợp với thiết kế của bạn */
     margin-bottom: 5px;
-    /* hoặc bạn có thể sử dụng padding-bottom tùy vào ý định của bạn */
 }
