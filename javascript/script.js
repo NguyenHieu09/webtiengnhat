@@ -56,3 +56,13 @@ function hideDropdown(element) {
 }
 
 
+
+$(document).ready(function () {
+    $('.signup-button').click(function () {
+        $('#modal-container').load('signUp.html #registerModal', function () {
+            $('#registerModal').modal('show');
+        });
+    });
+});
+
+
