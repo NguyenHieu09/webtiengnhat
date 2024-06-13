@@ -58,11 +58,41 @@ function hideDropdown(element) {
 
 
 $(document).ready(function () {
-    $('.signup-button').click(function () {
+    $('#openSignupModal').click(function () {
         $('#modal-container').load('signUp.html #registerModal', function () {
             $('#registerModal').modal('show');
         });
     });
 });
+
+$(document).ready(function () {
+    $('#openSigninModal').click(function () {
+        $('#modal-container').load('signIn.html #loginModal', function () {
+            $('#loginModal').modal('show');
+        });
+    });
+});
+
+
+$(document).ready(function () {
+    // Load and open the signup modal when the link in the signin modal is clicked
+    $(document).on('click', '#openSignupFromSignin', function () {
+        $('#loginModal').modal('hide');
+        $('#modal-container').load('signUp.html #registerModal', function () {
+            $('#registerModal').modal('show');
+        });
+    });
+
+    // Load and open the signin modal when the link in the signup modal is clicked
+    $(document).on('click', '#openSigninFromSignup', function () {
+        $('#registerModal').modal('hide');
+        $('#modal-container').load('signIn.html #loginModal', function () {
+            $('#loginModal').modal('show');
+        });
+    });
+});
+
+
+
 
 

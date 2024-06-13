@@ -4,40 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng kí</title>
-    <link rel="stylesheet" href="css/signUp.css">
+    <title>Đăng nhập</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/signUp.css">
 </head>
 
 <body>
-
     <!-- Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-body d-flex align-items-center justify-content-center">
                     <form class="form">
                         <div class="row">
                             <div class="col">
-                                <h2 class="title">Đăng kí</h2>
+                                <h2 class="title">Đăng Nhập</h2>
                             </div>
                             <div class="col-auto">
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                        </div>
-                        <p class="message">Đăng kí để có thể tìm kiểu trung tâm ngoại ngữ tốt nhất.</p>
-                        <div class="flex">
-                            <label>
-                                <input class="input" type="text" placeholder="" required>
-                                <span>Họ</span>
-                            </label>
-                            <label>
-                                <input class="input" type="text" placeholder="" required>
-                                <span>Tên</span>
-                            </label>
                         </div>
                         <label>
                             <input class="input" type="email" placeholder="" required>
@@ -47,12 +35,9 @@
                             <input class="input" type="password" placeholder="" required>
                             <span>Mật khẩu</span>
                         </label>
-                        <label>
-                            <input class="input" type="password" placeholder="" required>
-                            <span>Nhập lại mật khẩu</span>
-                        </label>
-                        <button class="submit">Đăng kí</button>
-                        <p class="signin">Bạn đã có tài khoản? <a href="#" id="openSigninFromSignup">Đăng nhập</a></p>
+
+                        <button class="submit">Đăng Nhập</button>
+                        <p class="signin">Bạn chưa có tài khoản? <a id="openSignupFromSignin" href="#">Đăng kí</a></p>
                     </form>
                 </div>
             </div>
