@@ -43,7 +43,8 @@
     margin: 0 4px;
 }
 
-.signup-button {
+.signup-button,
+.signin-button {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: white;
@@ -57,7 +58,8 @@
     font-size: 15px;
 }
 
-.signup-button span:not(:nth-child(6)) {
+.signup-button span:not(:nth-child(6)),
+.signin-button span:not(:nth-child(6)) {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -69,31 +71,38 @@
     transition: .6s ease;
 }
 
-.signup-button span:nth-child(6) {
+.signup-button span:nth-child(6),
+.signin-button span:nth-child(6) {
     position: relative;
 }
 
-.signup-button span:nth-child(1) {
+.signup-button span:nth-child(1),
+.signin-button span:nth-child(1) {
     transform: translate(-3.3em, -4em);
 }
 
-.signup-button span:nth-child(2) {
+.signup-button span:nth-child(2),
+.signin-button span:nth-child(2) {
     transform: translate(-6em, 1.3em);
 }
 
-.signup-button span:nth-child(3) {
+.signup-button span:nth-child(3),
+.signin-button span:nth-child(3) {
     transform: translate(-.2em, 1.8em);
 }
 
-.signup-button span:nth-child(4) {
+.signup-button span:nth-child(4),
+.signin-button span:nth-child(4) {
     transform: translate(3.5em, 1.4em);
 }
 
-.signup-button span:nth-child(5) {
+.signup-button span:nth-child(5),
+.signin-button span:nth-child(5) {
     transform: translate(3.5em, -3.8em);
 }
 
-.signup-button:hover span:not(:nth-child(6)) {
+.signup-button:hover span:not(:nth-child(6)),
+.signin-button:hover span:not(:nth-child(6)) {
     transform: translate(-50%, -50%) scale(4);
     transition: 1.5s ease;
 }
