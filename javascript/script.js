@@ -57,13 +57,13 @@ function hideDropdown(element) {
 
 
 
-$(document).ready(function () {
-    $('#openSignupModal').click(function () {
-        $('#modal-container').load('signUp.html #registerModal', function () {
-            $('#registerModal').modal('show');
-        });
-    });
-});
+// $(document).ready(function () {
+//     $('#openSignupModal').click(function () {
+//         $('#modal-container').load('signUp.html #registerModal', function () {
+//             $('#registerModal').modal('show');
+//         });
+//     });
+// });
 
 $(document).ready(function () {
     $('#openSigninModal').click(function () {
@@ -93,6 +93,63 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+    $('#openSignupModal').click(function () {
+        $('#modal-container').load('signUp.html #registerModal', function () {
+            $('#registerModal').modal('show');
 
+            // Thêm event listener sau khi form đăng ký được tải và hiển thị
+            document.querySelector('#registerForm').addEventListener('submit', function (event) {
+                // Ngăn chặn hành vi mặc định của form
+                event.preventDefault();
+
+                // Lấy dữ liệu từ form
+                const firstName = document.querySelector('#firstName').value;
+                const lastName = document.querySelector('#lastName').value;
+                const email = document.querySelector('#email').value;
+                const password = document.querySelector('#password').value;
+                const confirmPassword = document.querySelector('#confirmPassword').value;
+
+
+                // Kiểm tra xem mật khẩu và mật khẩu xác nhận có khớp không
+                if (password !== confirmPassword) {
+                    alert('Mật khẩu và mật khẩu xác nhận không khớp!');
+                    return;
+                }
+
+                // Gọi API
+                fetch('http://localhost:3000/api/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        $('#registerModal').modal('hide');
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    });
+});
+// function fetchData() {
+//     fetch('http://localhost:3000/api/data')
+//         .then(response => response.json())
+//         .then(data => console.log(data))
+//         .catch(error => console.error('Error:', error));
+// }
+
+// Gọi hàm khi trang web được tải
+// window.onload = fetchData;
 
 
