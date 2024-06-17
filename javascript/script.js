@@ -65,13 +65,13 @@ function hideDropdown(element) {
 //     });
 // });
 
-$(document).ready(function () {
-    $('#openSigninModal').click(function () {
-        $('#modal-container').load('signIn.html #loginModal', function () {
-            $('#loginModal').modal('show');
-        });
-    });
-});
+// $(document).ready(function () {
+//     $('#openSigninModal').click(function () {
+//         $('#modal-container').load('signIn.html #loginModal', function () {
+//             $('#loginModal').modal('show');
+//         });
+//     });
+// });
 
 
 $(document).ready(function () {
@@ -118,7 +118,9 @@ $(document).ready(function () {
                 }
 
                 // Gọi API
-                fetch('http://localhost:3000/api/signup', {
+                // fetch('http://localhost:3000/api/signup', {
+                fetch('https://webtiengnhat-be.onrender.com/api/signup', {
+
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -134,6 +136,7 @@ $(document).ready(function () {
                     .then(data => {
                         console.log('Success:', data);
                         $('#registerModal').modal('hide');
+
                     })
                     .catch((error) => {
                         console.error('Error:', error);
@@ -142,14 +145,55 @@ $(document).ready(function () {
         });
     });
 });
-// function fetchData() {
-//     fetch('http://localhost:3000/api/data')
-//         .then(response => response.json())
-//         .then(data => console.log(data))
-//         .catch(error => console.error('Error:', error));
-// }
 
-// Gọi hàm khi trang web được tải
-// window.onload = fetchData;
+$(document).ready(function () {
+    $('#openSigninModal').click(function () {
+        $('#modal-container').load('signIn.html #loginModal', function () {
+            $('#loginModal').modal('show');
+
+            // Thêm event listener sau khi form đăng nhập được tải và hiển thị
+            document.querySelector('#loginForm').addEventListener('submit', function (event) {
+                // Ngăn chặn hành vi mặc định của form
+                event.preventDefault();
+
+                // Lấy dữ liệu từ form
+                const email = document.querySelector('#email').value;
+                const password = document.querySelector('#password').value;
+
+                // Gọi API
+                // fetch('http://localhost:3000/api/login', {
+                fetch('https://webtiengnhat-be.onrender.com/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        console.log(data.user.firstName);
+                        $('#loginModal').modal('hide');
+                        localStorage.setItem('username', data.user.firstName + ' ' + data.user.lastName);
+
+                        // Thay đổi nút "Đăng nhập" và "Đăng kí" thành "Xin chào, [Tên người dùng]"
+                        $('#openSigninModal').hide();
+                        $('#openSignupModal').hide();
+
+                        // var greeting = $('<div>').text('Xin chào, ' + data.user.firstName + ' ' + data.user.lastName);
+                        // $('.d-flex').append(greeting);
+
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    });
+});
+
 
 
