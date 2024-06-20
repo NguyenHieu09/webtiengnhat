@@ -45,33 +45,22 @@
 //     });
 // }
 
-function showDropdown(element) {
-    var dropdownContent = element.querySelector('.dropdown-content');
-    dropdownContent.style.display = "block";
-}
-
-function hideDropdown(element) {
-    var dropdownContent = element.querySelector('.dropdown-content');
-    dropdownContent.style.display = "none";
-}
-
 
 
 // $(document).ready(function () {
-//     $('#openSignupModal').click(function () {
-//         $('#modal-container').load('signUp.html #registerModal', function () {
-//             $('#registerModal').modal('show');
-//         });
-//     });
+//     $("#navbar-container").load("nav.html");
 // });
 
-// $(document).ready(function () {
-//     $('#openSigninModal').click(function () {
-//         $('#modal-container').load('signIn.html #loginModal', function () {
-//             $('#loginModal').modal('show');
-//         });
-//     });
-// });
+// function showDropdown(element) {
+//     var dropdownContent = element.querySelector('.dropdown-content');
+//     dropdownContent.style.display = "block";
+// }
+
+// function hideDropdown(element) {
+//     var dropdownContent = element.querySelector('.dropdown-content');
+//     dropdownContent.style.display = "none";
+// }
+
 
 
 $(document).ready(function () {
@@ -119,8 +108,8 @@ $(document).ready(function () {
 
                 // Gọi API
                 // fetch('http://localhost:3000/api/signup', {
-                fetch('https://webtiengnhat-be.onrender.com/api/signup', {
-
+                // fetch('https://webtiengnhat-be.onrender.com/api/signup', {
+                fetch('http://localhost:3000/api/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -146,7 +135,28 @@ $(document).ready(function () {
     });
 });
 
+
 $(document).ready(function () {
+    // Kiểm tra localStorage khi tải trang
+    var loggedInUser = JSON.parse(localStorage.getItem('user'));
+
+    if (loggedInUser) {
+        // Nếu có thông tin đăng nhập trong localStorage
+        var successButton = document.getElementById('success');
+        var textSpan = successButton.querySelector('.text');
+        textSpan.innerHTML = `<i class="fas fa-user-circle"></i> ${loggedInUser.firstName} ${loggedInUser.lastName}`;
+
+        // Hiển thị nút #success và ẩn nút #openSignupModal và #openSigninModal
+        successButton.style.display = 'block';
+        $('#openSignupModal').hide();
+        $('#openSigninModal').hide();
+    } else {
+        // Nếu không có thông tin đăng nhập trong localStorage
+        $('#success').hide();
+        $('#openSignupModal').show();
+        $('#openSigninModal').show();
+    }
+
     $('#openSigninModal').click(function () {
         $('#modal-container').load('signIn.html #loginModal', function () {
             $('#loginModal').modal('show');
@@ -161,8 +171,9 @@ $(document).ready(function () {
                 const password = document.querySelector('#password').value;
 
                 // Gọi API
-                // fetch('http://localhost:3000/api/login', {
-                fetch('https://webtiengnhat-be.onrender.com/api/login', {
+                // fetch('https://webtiengnhat-be.onrender.com/api/login', {
+                fetch('http://localhost:3000/api/login', {
+
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -176,16 +187,25 @@ $(document).ready(function () {
                     .then(data => {
                         console.log('Success:', data);
                         console.log(data.user.firstName);
+
+                        // Đóng modal sau khi đăng nhập thành công
                         $('#loginModal').modal('hide');
-                        localStorage.setItem('username', data.user.firstName + ' ' + data.user.lastName);
 
-                        // Thay đổi nút "Đăng nhập" và "Đăng kí" thành "Xin chào, [Tên người dùng]"
-                        $('#openSigninModal').hide();
+                        // Lưu thông tin người dùng vào localStorage
+                        localStorage.setItem('user', JSON.stringify({
+                            firstName: data.user.firstName,
+                            lastName: data.user.lastName
+                        }));
+
+                        // Cập nhật nội dung của nút #success với icon account và tên người dùng
+                        var successButton = document.getElementById('success');
+                        var textSpan = successButton.querySelector('.text');
+                        textSpan.innerHTML = `<i class="fas fa-user-circle"></i> ${data.user.firstName} ${data.user.lastName}`;
+
+                        // Hiển thị nút #success và ẩn nút #openSignupModal và #openSigninModal
+                        successButton.style.display = 'block';
                         $('#openSignupModal').hide();
-
-                        // var greeting = $('<div>').text('Xin chào, ' + data.user.firstName + ' ' + data.user.lastName);
-                        // $('.d-flex').append(greeting);
-
+                        $('#openSigninModal').hide();
                     })
                     .catch((error) => {
                         console.error('Error:', error);
@@ -193,7 +213,17 @@ $(document).ready(function () {
             });
         });
     });
+
+    // Xử lý sự kiện click vào nút đăng xuất
+    $('#logoutButton').click(function () {
+        // Xóa thông tin người dùng khỏi localStorage
+        localStorage.removeItem('user');
+
+        // Ẩn nút #success và hiển thị lại nút #openSignupModal và #openSigninModal
+        $('#success').hide();
+        $('#openSignupModal').show();
+        $('#openSigninModal').show();
+    });
+
 });
-
-
 

@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+
+}
+
+.img-logo {
+    width: 10vh;
+    height: auto;
+}
+
+
+.navbar-nav .nav-item:hover .nav-link {
+    color: #FF7F3E;
+
+}
+
+
+.navbar-nav li>a {
+    font-weight: 700;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #FFDA78;
+
+}
+
+.navbar {
+    justify-content: space-between;
+    align-items: center;
+    /* height: 10vh; */
+}
+
+.nav-item {
+    margin: 0 4px;
+}
+
+.signup-button,
+.signin-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: #003285;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.signup-button span:not(:nth-child(6)),
+.signin-button span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #FF7F3E;
+    border-radius: 50%;
+    transition: .6s ease;
+}
+
+.signup-button span:nth-child(6),
+.signin-button span:nth-child(6) {
+    position: relative;
+}
+
+.signup-button span:nth-child(1),
+.signin-button span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+}
+
+.signup-button span:nth-child(2),
+.signin-button span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+}
+
+.signup-button span:nth-child(3),
+.signin-button span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+}
+
+.signup-button span:nth-child(4),
+.signin-button span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+}
+
+.signup-button span:nth-child(5),
+.signin-button span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+}
+
+.signup-button:hover span:not(:nth-child(6)),
+.signin-button:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+}
