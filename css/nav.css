@@ -106,3 +106,38 @@
     transform: translate(-50%, -50%) scale(4);
     transition: 1.5s ease;
 }
+
+#success {
+    display: none;
+}
+
+/* CSS cho dropdown-menu */
+.dropdownLogout {
+    border-radius: 50%;
+    overflow: hidden;
+
+}
+
+/* CSS cho dropdown-logout */
+.dropdown-logout {
+    display: block;
+    width: 100%;
+    color: #000000;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #ffffff;
+}
+
+.dropdown-logout:hover {
+    color: #ff0000;
+}
+
+.dropdown-logout:focus {
+    outline: none;
+}
+
+.dropdown-logout:active {
+    transform: translateY(1px);
+}
