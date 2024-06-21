@@ -138,7 +138,9 @@ $(document).ready(function () {
             }
 
             // Gọi API đăng ký
-            fetch('http://localhost:3000/api/signup', {
+            // fetch('http://localhost:3000/api/signup', {
+            fetch('https://webtiengnhat-be.onrender.com/api/signup', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -172,7 +174,8 @@ $(document).ready(function () {
             const password = $('#password').val();
 
             // Gọi API đăng nhập
-            fetch('http://localhost:3000/api/login', {
+            // fetch('http://localhost:3000/api/login', {
+            fetch('https://webtiengnhat-be.onrender.com/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -189,7 +192,8 @@ $(document).ready(function () {
                     // Thực hiện các hành động khác nếu cần
                     localStorage.setItem('user', JSON.stringify({
                         firstName: data.user.firstName,
-                        lastName: data.user.lastName
+                        lastName: data.user.lastName,
+                        role: data.user.role
                     }));
 
                     var successButton = document.getElementById('success');
@@ -199,6 +203,9 @@ $(document).ready(function () {
                     successButton.style.display = 'block';
                     $('#openSignupModal').hide();
                     $('#openSigninModal').hide();
+                    if (data.user.role == 'admin') {
+                        window.location.href = 'admin.html';
+                    }
 
                 })
                 .catch(error => {
