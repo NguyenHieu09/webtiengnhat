@@ -34,13 +34,34 @@
 }
 
 .navbar {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    /* height: 10vh; */
+    flex-wrap: nowrap;
+    /* Thêm dòng này để ngăn các items bị xuống dòng */
 }
 
-.nav-item {
-    margin: 0 4px;
+/* Đảm bảo rằng container chứa các nút đăng nhập và đăng kí cũng sử dụng flexbox */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Điều chỉnh kích thước và khoảng cách của các nút ở các điểm ngắt khác nhau */
+@media (max-width: 768px) {
+
+    .signup-button,
+    .signin-button {
+        padding: 0.25em 0.5em;
+        /* Giảm kích thước padding */
+        font-size: 12px;
+        /* Giảm kích thước font */
+    }
+
+    .nav-item {
+        margin: 0 2px;
+        /* Giảm khoảng cách giữa các items */
+    }
 }
 
 .signup-button,
@@ -140,4 +161,85 @@
 
 .dropdown-logout:active {
     transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        font-size: 12px;
+        /* Điều chỉnh font-size nhỏ hơn cho màn hình nhỏ */
+    }
+
+
+    .img-logo {
+        width: 5vh;
+        height: auto;
+    }
+
+    .signup-button,
+    .signin-button {
+        font-size: 6px;
+        /* Điều chỉnh kích thước font chữ cho các nút */
+    }
+
+    .nav-item {
+        margin: 0 2px;
+        /* Điều chỉnh khoảng cách của các nav-item */
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .input-container {
+        width: 50%;
+    }
+
+    /* file styles.css hoặc tên file CSS mà bạn đang sử dụng */
+    .dropdown .dropdown-toggle {
+        font-size: 10px;
+        /* Thiết lập kích thước font cho nút */
+        padding: 0.5rem 1rem;
+        /* Thiết lập padding cho nút */
+    }
+
+    .dropdown .dropdown-toggle .circle1,
+    .dropdown .dropdown-toggle .circle2,
+    .dropdown .dropdown-toggle .circle3,
+    .dropdown .dropdown-toggle .circle4,
+    .dropdown .dropdown-toggle .circle5 {
+        width: 10px;
+        /* Thiết lập kích thước của các circle */
+        height: 10px;
+        margin: 0 2px;
+        /* Điều chỉnh khoảng cách giữa các circle */
+    }
+
+    .dropdown .dropdown-logout {
+        font-size: 10px;
+        /* Thiết lập kích thước font cho nội dung "Đăng xuất" */
+        padding: 2px 1px;
+        /* Thiết lập padding cho nút "Đăng xuất" */
+    }
+
+}
+
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container .form-control {
+    padding-right: 20px;
+    /* Khoảng cách phía bên phải của ô input để chứa icon */
+}
+
+.input-container .icon-search {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }

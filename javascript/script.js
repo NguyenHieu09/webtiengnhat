@@ -125,22 +125,33 @@ $(document).ready(function () {
         $('#registerForm').off('submit').on('submit', function (event) {
             event.preventDefault();
 
-            const firstName = $('#firstName').val();
-            const lastName = $('#lastName').val();
-            const email = $('#email').val();
-            const password = $('#password').val();
-            const confirmPassword = $('#confirmPassword').val();
+            const firstName = $('#firstName').val().trim();
+            const lastName = $('#lastName').val().trim();
+            const email = $('#email').val().trim();
+            const password = $('#password').val().trim();
+            const confirmPassword = $('#confirmPassword').val().trim();
 
-            // Kiểm tra mật khẩu và mật khẩu xác nhận
-            if (password !== confirmPassword) {
-                alert('Mật khẩu và mật khẩu xác nhận không khớp!');
+            // Basic validation for empty fields
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                alert('Please fill out all fields.');
                 return;
             }
 
-            // Gọi API đăng ký
-            // fetch('http://localhost:3000/api/signup', {
-            fetch('https://webtiengnhat-be.onrender.com/api/signup', {
+            // Validate email format using a regular expression
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
 
+            // Check if password and confirm password match
+            if (password !== confirmPassword) {
+                alert('Password and confirm password do not match.');
+                return;
+            }
+
+            // Call the signup API
+            fetch('http://localhost:3000/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,15 +163,20 @@ $(document).ready(function () {
                     password: password,
                 }),
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw new Error(error.message); });
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    console.log('Đăng ký thành công:', data);
+                    console.log('Registration successful:', data);
                     $('#registerModal').modal('hide');
-                    // Thực hiện các hành động khác nếu cần
-
+                    alert('User registered successfully. Please log in.');
                 })
                 .catch(error => {
-                    console.error('Lỗi khi đăng ký:', error);
+                    console.error('Error during registration:', error);
+                    alert('An error occurred during registration. Please try again.');
                 });
         });
     }
@@ -173,9 +189,14 @@ $(document).ready(function () {
             const email = $('#email').val();
             const password = $('#password').val();
 
-            // Gọi API đăng nhập
-            // fetch('http://localhost:3000/api/login', {
-            fetch('https://webtiengnhat-be.onrender.com/api/login', {
+
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
+
+            // Call login API
+            fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -185,11 +206,16 @@ $(document).ready(function () {
                     password: password,
                 }),
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw new Error(error.message); });
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    console.log('Đăng nhập thành công:', data);
+                    console.log('Login successful:', data);
                     $('#loginModal').modal('hide');
-                    // Thực hiện các hành động khác nếu cần
+
                     localStorage.setItem('user', JSON.stringify({
                         firstName: data.user.firstName,
                         lastName: data.user.lastName,
@@ -203,18 +229,22 @@ $(document).ready(function () {
                     successButton.style.display = 'block';
                     $('#openSignupModal').hide();
                     $('#openSigninModal').hide();
-                    if (data.user.role == 'admin') {
+                    if (data.user.role === 'admin') {
                         window.location.href = 'admin.html';
                     }
-
+                    if (data.user.role === 'user') {
+                        window.location.href = 'home.html';
+                    }
                 })
                 .catch(error => {
-                    console.error('Lỗi khi đăng nhập:', error);
+                    console.error('Error during login:', error);
+                    alert('Email hoặc mật khẫu chưa đúng. Vui lòng nhập lại!');
                 });
 
         });
-
     }
 
 });
+
+
 

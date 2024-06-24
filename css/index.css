@@ -259,3 +259,38 @@ button:active {
         transform: translateY(-0.1em);
     }
 }
+
+/* CSS mới cho màn hình nhỏ hơn */
+@media (max-width: 768px) {
+
+    /* Đặt lại kích thước font chữ nhỏ hơn */
+    html,
+    body {
+        font-size: 12px;
+        /* Font chữ nhỏ hơn cho màn hình nhỏ hơn */
+    }
+
+    /* Các điều chỉnh khác tùy theo yêu cầu của bạn */
+    .footer {
+        padding: 10px;
+        /* Thay đổi khoảng cách bên trong footer */
+    }
+
+    .custom-button {
+        font-size: 14px;
+        /* Font chữ nhỏ hơn cho nút custom */
+    }
+
+    .social-link {
+        width: 40px;
+        /* Giảm kích thước liên kết mạng xã hội */
+        height: 40px;
+        /* Giảm kích thước liên kết mạng xã hội */
+        line-height: 30px;
+        /* Giảm khoảng cách dòng cho liên kết mạng xã hội */
+    }
+
+    span .text {
+        font-size: 12px;
+    }
+}
