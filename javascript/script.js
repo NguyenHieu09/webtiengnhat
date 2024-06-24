@@ -151,7 +151,9 @@ $(document).ready(function () {
             }
 
             // Call the signup API
-            fetch('http://localhost:3000/api/signup', {
+            // fetch('http://localhost:3000/api/signup', {
+            fetch('https://webtiengnhat-be.onrender.com/api/signup', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -196,7 +198,9 @@ $(document).ready(function () {
             }
 
             // Call login API
-            fetch('http://localhost:3000/api/login', {
+            // fetch('http://localhost:3000/api/login', {
+            fetch('https://webtiengnhat-be.onrender.com/api/login', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
