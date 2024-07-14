@@ -75,38 +75,23 @@ body {
 /* CSS cho các bài post */
 
 /* Style cho mỗi bài post */
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Tối thiểu 200px và mở rộng để lấp đầy không gian còn lại */
+    gap: 20px;
+    /* Khoảng cách giữa các bài post */
+    max-width: 1800px;
+    /* Giới hạn chiều rộng của grid */
+    margin: 0 auto;
+    /* Căn giữa grid */
+}
+
 .post {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     padding: 15px;
-    margin-bottom: 20px;
-    width: calc(100% / 3);
-    /* Đặt chiều rộng cơ bản của mỗi bài post */
     box-sizing: border-box;
-    /* Đảm bảo tính toàn vẹn của box model */
-    float: left;
-    /* Sử dụng float để các bài post nằm cạnh nhau */
-}
-
-/* Xóa float ở cuối mỗi hàng */
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Điều chỉnh các bài post khi hiển thị trên màn hình lớn */
-@media screen and (min-width: 768px) {
-    .post {
-        width: calc(100% / 6 - 10px);
-        /* Điều chỉnh chiều rộng của mỗi bài post khi hiển thị trên màn hình lớn */
-    }
-}
-
-
-.post-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
 }
 
 .post-image {
@@ -116,20 +101,32 @@ body {
     margin-bottom: 15px;
 }
 
+.post-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
 .post-content {
     font-size: 1em;
     color: #333;
 }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+@media (min-width: 768px) {
+    .posts-container {
+        grid-template-columns: repeat(6, 1fr);
+        /* 6 cột trên màn hình từ 768px trở lên */
+    }
 }
 
-.col-md-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-    box-sizing: border-box;
-    padding: 0 10px;
+section h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.see-all-btn {
+    text-decoration: none;
+    font-size: 22px;
+    color: #007bff;
+    /* Màu chữ xanh */
 }

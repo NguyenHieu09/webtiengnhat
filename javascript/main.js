@@ -104,47 +104,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
             const data = await response.json();
-            const posts = data.posts.slice(0, 12); // Giới hạn số lượng bài viết là 6
+            const posts = data.posts.slice(0, 12); // Giới hạn số lượng bài viết là 12
+
+            // Lấy phần tử cha của .posts-container trong section tương ứng
             const section = document.getElementById(sectionId);
+            const postsContainer = section.querySelector('.posts-container');
 
-            // Clear old posts while keeping the <h1> element
-            section.querySelectorAll('.post').forEach(post => post.remove());
+            postsContainer.innerHTML = '';
 
-            let row;
-            posts.forEach((post, index) => {
-                // Tạo một hàng mới sau khi đã thêm 6 bài post
-                if (index % 6 === 0) {
-                    row = document.createElement('div');
-                    row.classList.add('row', 'clearfix'); // Thêm lớp clearfix để xóa float
-                }
-
-                // Tạo phần tử cho mỗi bài post
-                const postElement = document.createElement('div');
-                postElement.classList.add('col-md-2', 'post'); // Đặt chiều rộng cơ bản của mỗi bài post
-                postElement.innerHTML = `
-                    <h2 class="post-title">${post.title}</h2>
-                    <img class="post-image" src="${post.img}" alt="${post.title}" />
-                    <p class="post-content">${post.content}</p>
+            posts.forEach(post => {
+                const postHTML = `
+                    <a href="post-detail.html?id=${post.id}"  style="text-decoration: none; color: black">
+                        <div class="post">
+                            <h2 class="post-title">${post.title}</h2>
+                            <img class="post-image" src="${post.img}" alt="post-image" />
+                            <p class="post-content">${post.content}</p>
+                        </div>
+                    </a>
                 `;
 
-                // Thêm bài post vào hàng hiện tại
-                row.appendChild(postElement);
-
-                // Thêm hàng vào section khi đã đủ 6 bài post hoặc là bài post cuối cùng
-                if ((index + 1) % 6 === 0 || index === posts.length - 1) {
-                    section.appendChild(row);
-                }
+                postsContainer.insertAdjacentHTML('beforeend', postHTML);
             });
+
         } catch (error) {
             console.error('Error fetching posts:', error);
         }
     }
 
     // Load các bài post theo loại khi trang được tải
-    loadPostsByType('KH', 'courses');
-    loadPostsByType('DH', 'study-abroad');
-    loadPostsByType('KS', 'engineer-news');
-    loadPostsByType('XKLD', 'labor-export');
-    loadPostsByType('TD', 'job-openings');
+    loadPostsByType('KH', 'courses');       // 'KH' là khóa học
+    loadPostsByType('DH', 'study-abroad');  // 'DH' là tin du học
+    loadPostsByType('KS', 'engineer-news'); // 'KS' là tin kỹ sư
+    loadPostsByType('XKLD', 'labor-export');// 'XKLD' là tin xuất khẩu lao động
+    loadPostsByType('TD', 'job-openings');  // 'TD' là tin tuyển dụng
 });
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const type = 'KH'; // Thay đổi 'courses' thành loại bài post bạn muốn lấy
+
+//     // Gọi API từ backend để lấy danh sách bài post theo 'type'
+//     fetch(`http://localhost:3000/api/type/posts?type=${type}`)
+//         .then(response => response.json())
+//         .then(data => {
+//             const posts = data.posts; // Lấy danh sách bài post từ dữ liệu nhận được
+
+//             const postsContainer = document.querySelector('.posts-container');
+
+//             // Xóa nội dung hiện tại của postsContainer (nếu có)
+//             postsContainer.innerHTML = '';
+
+//             // Duyệt qua danh sách bài post và tạo HTML để hiển thị lên giao diện
+//             posts.forEach(post => {
+//                 const postHTML = `
+//                     <div class="post">
+//                         <h2 class="post-title">${post.title}</h2>
+//                         <img class="post-image" src="${post.img}" alt="post-image" />
+//                         <p class="post-content">${post.content}</p>
+//                     </div>
+//                 `;
+//                 postsContainer.insertAdjacentHTML('beforeend', postHTML);
+//             });
+//         })
+//         .catch(error => {
+//             console.error('Error fetching posts:', error);
+//             // Xử lý lỗi khi gọi API không thành công
+//         });
+// });
+
 
