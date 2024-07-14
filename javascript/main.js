@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadPostsByType(type, sectionId) {
         try {
             const response = await fetch(`http://localhost:3000/api/type/posts?type=${type}`);
+            // const response = await fetch(`https://webtiengnhat-be.onrender.com/api/type/posts?type=${type}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
