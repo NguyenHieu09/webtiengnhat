@@ -130,3 +130,32 @@ section h1 {
     color: #007bff;
     /* Màu chữ xanh */
 }
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    /* khoảng cách giữa các button */
+    margin: 20px 0;
+    /* khoảng cách trên dưới cho container */
+}
+
+.new-post-btn {
+    padding: 50px 50px;
+    background-color: #FFF6E9;
+    /* Màu nền của button */
+    color: #604CC3;
+    font-weight: 700;
+    /* Màu chữ của button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.new-post-btn:hover {
+    background-color: #80C4E9;
+    /* Màu nền khi hover */
+}

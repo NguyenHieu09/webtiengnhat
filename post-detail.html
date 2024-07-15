@@ -59,8 +59,8 @@
             const postId = urlParams.get('id');
             console.log(postId);
 
-            fetch(`http://localhost:3000/api/posts/${postId}`)
-                // fetch(`https://webtiengnhat-be.onrender.com/api/posts/${postId}`)
+            // fetch(`http://localhost:3000/api/posts/${postId}`)
+            fetch(`https://webtiengnhat-be.onrender.com/api/posts/${postId}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

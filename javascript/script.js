@@ -151,8 +151,8 @@ $(document).ready(function () {
             }
 
             // Call the signup API
-            fetch('http://localhost:3000/api/signup', {
-                // fetch('https://webtiengnhat-be.onrender.com/api/signup', {
+            // fetch('http://localhost:3000/api/signup', {
+            fetch('https://webtiengnhat-be.onrender.com/api/signup', {
 
                 method: 'POST',
                 headers: {
@@ -198,8 +198,8 @@ $(document).ready(function () {
             }
 
             // Call login API
-            fetch('http://localhost:3000/api/login', {
-                // fetch('https://webtiengnhat-be.onrender.com/api/login', {
+            // fetch('http://localhost:3000/api/login', {
+            fetch('https://webtiengnhat-be.onrender.com/api/login', {
 
                 method: 'POST',
                 headers: {
@@ -235,7 +235,7 @@ $(document).ready(function () {
                     $('#openSignupModal').hide();
                     $('#openSigninModal').hide();
                     if (data.user.role === 'admin') {
-                        window.location.href = 'sidebar.html';
+                        window.location.href = 'admin.html';
                     }
                     if (data.user.role === 'user') {
                         window.location.href = 'home.html';
