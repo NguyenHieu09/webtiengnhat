@@ -14,8 +14,8 @@ function closeNav() {
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         // Fetch số lượng bài viết theo từng loại
-        // const responseCount = await fetch('http://localhost:3000/api/count-post-by-type');
-        const responseCount = await fetch('https:webtiengnhat-be.onrender.com/api/count-post-by-type')
+        const responseCount = await fetch('http://localhost:3000/api/count-post-by-type');
+        // const responseCount = await fetch('https:webtiengnhat-be.onrender.com/api/count-post-by-type')
         const dataCount = await responseCount.json();
         console.log(dataCount);
 
@@ -30,22 +30,69 @@ document.addEventListener("DOMContentLoaded", async () => {
         await loadPostsByType('XKLD', 'labor-export');// 'XKLD' là tin xuất khẩu lao động
         await loadPostsByType('TD', 'job-openings');  // 'TD' là tin tuyển dụng
 
+        // Sự kiện click vào các button để chuyển hướng đến trang tạo bài viết
+        document.querySelectorAll('.new-post-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const type = btn.id.replace('btn-', '').toUpperCase(); // Lấy loại bài viết từ id của button và chuyển thành in hoa
+                createNewPost(type);
+            });
+        });
+
+
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 });
 
+
 async function updateButtonContent(counts) {
     counts.forEach(item => {
-        const type = item.type;
+        const type = item.type.toLowerCase();
         const count = item.total_posts;
+        let iconClass = '';
+        let typePost = '';
+
+        // Ánh xạ từng loại bài viết với một icon cụ thể
+        switch (type) {
+            case 'kh':
+                iconClass = 'fa-book';
+                typePost = 'khóa học';
+                break;
+            case 'dh':
+                iconClass = 'fa-plane';
+                typePost = 'du học';
+                break;
+            case 'ks':
+                iconClass = 'fa-cogs';
+                typePost = 'kỹ sư';
+                break;
+            case 'xkld':
+                iconClass = 'fa-briefcase';
+                typePost = 'xuất khẩu lao động';
+                break;
+            case 'td':
+                iconClass = 'fa-user-tie';
+                typePost = 'tuyển dụng'
+                break;
+            default:
+                iconClass = 'fa-question'; // Hoặc sử dụng một icon mặc định
+                break;
+        }
 
         // Sử dụng querySelector để lấy nút button và cập nhật nội dung
-        const button = document.querySelector(`#btn-${type.toLowerCase()}`);
+        const button = document.querySelector(`#btn-${type}`);
         if (button) {
-            button.textContent = `Thêm mới bài viết ${type} (${count})`;
+            button.innerHTML = `
+                <div>
+                    <i class="fas ${iconClass}"></i>
+                    <p>${count} bài viết ${typePost}</p>
+                </div>
+                <div class="post-info">
+                    Thêm mới <i class="fas fa-arrow-right"></i>
+                </div>
+            `;
         } else {
-            console.error(`Button #btn-${type.toLowerCase()} not found`);
+            console.error(`Button #btn-${type} not found`);
         }
     });
 }
@@ -53,8 +100,8 @@ async function updateButtonContent(counts) {
 
 async function loadPostsByType(type, sectionId) {
     try {
-        // const response = await fetch(`http://localhost:3000/api/type/posts?type=${type}`);
-        const response = await fetch(`https://webtiengnhat-be.onrender.com/api/type/posts?type=${type}`);
+        const response = await fetch(`http://localhost:3000/api/type/posts?type=${type}`);
+        // const response = await fetch(`https://webtiengnhat-be.onrender.com/api/type/posts?type=${type}`);
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
@@ -84,4 +131,9 @@ async function loadPostsByType(type, sectionId) {
     } catch (error) {
         console.error('Error fetching posts:', error);
     }
+}
+
+function createNewPost(type) {
+
+    window.location.href = `create-post.html?type=${type}`;
 }

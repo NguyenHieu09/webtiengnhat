@@ -135,27 +135,45 @@ section h1 {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    /* khoảng cách giữa các button */
     margin: 20px 0;
-    /* khoảng cách trên dưới cho container */
 }
 
 .new-post-btn {
-    padding: 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
     background-color: #FFF6E9;
-    /* Màu nền của button */
     color: #604CC3;
     font-weight: 700;
-    /* Màu chữ của button */
     border: none;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
     font-size: 18px;
+    position: relative;
     transition: background-color 0.3s;
+    height: 150px;
+    justify-content: center;
 }
 
 .new-post-btn:hover {
     background-color: #80C4E9;
-    /* Màu nền khi hover */
+}
+
+
+.post-info {
+    align-items: flex-end;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: right;
+    font-size: 14px;
+
+}
+
+
+.post-info .fa-plus {
+    margin-left: 5px;
 }
