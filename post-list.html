@@ -10,7 +10,8 @@
 
 <body>
     <header>
-        <h1 style="text-align: center;margin-bottom: 20px;margin-top: 20px;">Danh sách các bài tiết về khóa học</h1>
+        <h1 id="pageTitle" style="text-align: center;margin-bottom: 20px;margin-top: 20px;">Danh sách các bài tiết về
+            khóa học</h1>
     </header>
 
     <main>
@@ -46,16 +47,44 @@
 
                     posts.forEach(post => {
                         const postHTML = `
-                            <a href="post-detail.html?id=${post.id}"  style="text-decoration: none; color: black">
-                        <div class="post">
-                            <h2 class="post-title">${post.title}</h2>
-                            <img class="post-image" src="${post.img}" alt="post-image" />
-                            <p class="post-content">${post.content}</p>
-                        </div>
+                            
+                   <div class="post">
+                    <a href="post-detail.html?id=${post.id}" class="post-detail">
+                        <h2 class="post-title">${post.title}</h2>
+                        <img class="post-image" src="${post.img}" alt="post-image" />
+                        <div class="post-content">${post.content}</div>
                     </a>
+                    <div class="post-buttons">
+                        <button class="edit-button" onclick="editPost(${post.id})">Sửa</button>
+                        <button class="delete-button" onclick="deletePost(${post.id})">Xóa</button>
+                    </div>
+                </div>
                         `;
                         postsContainer.insertAdjacentHTML('beforeend', postHTML);
                     });
+                    let typeFullName = '';
+                    switch (type) {
+                        case 'KH':
+                            typeFullName = 'khóa học';
+                            break;
+                        case 'DH':
+                            typeFullName = 'du học';
+                            break;
+                        case 'KS':
+                            typeFullName = 'kỹ sư';
+                            break;
+                        case 'XKLD':
+                            typeFullName = 'xuất khẩu lao động';
+                            break;
+                        case 'TD':
+                            typeFullName = 'tuyển dụng';
+                            break;
+                        default:
+                            typeFullName = type; // Mặc định hiển thị chính xác loại bài viết nếu không trùng với các case trên
+                    }
+
+                    document.getElementById('pageTitle').innerText = `Danh sách các bài viết về ${typeFullName}`;
+
                 })
                 .catch(error => {
                     console.error('Error fetching posts:', error);

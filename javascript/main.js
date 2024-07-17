@@ -14,8 +14,8 @@ function closeNav() {
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         // Fetch số lượng bài viết theo từng loại
-        const responseCount = await fetch('http://localhost:3000/api/count-post-by-type');
-        // const responseCount = await fetch('https:webtiengnhat-be.onrender.com/api/count-post-by-type')
+        // const responseCount = await fetch('http://localhost:3000/api/count-post-by-type');
+        const responseCount = await fetch('https:webtiengnhat-be.onrender.com/api/count-post-by-type')
         const dataCount = await responseCount.json();
         console.log(dataCount);
 
@@ -98,6 +98,7 @@ async function updateButtonContent(counts) {
 }
 
 
+
 async function loadPostsByType(type, sectionId) {
     try {
         // const response = await fetch(`http://localhost:3000/api/type/posts?type=${type}`);
@@ -116,13 +117,19 @@ async function loadPostsByType(type, sectionId) {
 
         posts.forEach(post => {
             const postHTML = `
-                <a href="post-detail.html?id=${post.id}" style="text-decoration: none; color: black">
-                    <div class="post">
+               
+                   <div class="post">
+                    <a href="post-detail.html?id=${post.id}" class="post-detail">
                         <h2 class="post-title">${post.title}</h2>
                         <img class="post-image" src="${post.img}" alt="post-image" />
-                        <p class="post-content">${post.content}</p>
+                        <div class="post-content">${post.content}</div>
+                    </a>
+                    <div class="post-buttons">
+                        <button class="edit-button" onclick="editPost(${post.id})">Sửa</button>
+                        <button class="delete-button" onclick="deletePost(${post.id})">Xóa</button>
                     </div>
-                </a>
+                </div>
+
             `;
 
             postsContainer.insertAdjacentHTML('beforeend', postHTML);
@@ -136,4 +143,34 @@ async function loadPostsByType(type, sectionId) {
 function createNewPost(type) {
 
     window.location.href = `create-post.html?type=${type}`;
+}
+
+function editPost(postId) {
+    // Chuyển hướng người dùng đến trang cập nhật bài viết với postId được gắn vào URL
+    window.location.href = `update-post.html?id=${postId}`;
+}
+
+async function deletePost(postId) {
+    const confirmDelete = confirm('Bạn có chắc chắn muốn xóa bài viết này?');
+    if (!confirmDelete) return;
+
+    try {
+        // const response = await fetch(`http://localhost:3000/api/posts/${postId}`, {
+        const response = await fetch(`https://webtiengnhat-be.onrender.com/api/posts/${postId}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        // Remove the post from the DOM
+        const postElement = document.querySelector(`.post a[href="post-detail.html?id=${postId}"]`).closest('.post');
+        postElement.remove();
+
+        alert('Bài viết đã được xóa thành công');
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        alert('Không thể xóa bài viết');
+    }
 }
