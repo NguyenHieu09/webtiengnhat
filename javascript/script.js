@@ -123,20 +123,20 @@ $(document).ready(function () {
 
             // Basic validation for empty fields
             if (!firstName || !lastName || !email || !password || !confirmPassword) {
-                alert('Please fill out all fields.');
+                alert('Vui lòng điền đầy đủ tất cả các trường.');
                 return;
             }
 
             // Validate email format using a regular expression
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(email)) {
-                alert('Please enter a valid email address.');
+                alert('Vui lòng nhập địa chỉ email hợp lệ.');
                 return;
             }
 
             // Check if password and confirm password match
             if (password !== confirmPassword) {
-                alert('Password and confirm password do not match.');
+                alert('Mật khẩu và mật khẩu xác nhận không khớp.');
                 return;
             }
 
@@ -163,11 +163,11 @@ $(document).ready(function () {
                 .then(data => {
                     console.log('Registration successful:', data);
                     $('#registerModal').modal('hide');
-                    alert('User registered successfully. Please log in.');
+                    alert('Chúc mừng bạn đã đăng kí thành công. Vui lòng đăng nhập để sử dụng dịch vụ!');
                 })
                 .catch(error => {
                     console.error('Error during registration:', error);
-                    alert('An error occurred during registration. Please try again.');
+                    alert('Việc đăng kí tài khoản đang gặp gián đoạn. Vui lòng thử lại lần nữa!');
                 });
         });
     }
@@ -181,7 +181,7 @@ $(document).ready(function () {
             const password = $('#password').val();
 
             if (!email || !password) {
-                alert('Please enter both email and password.');
+                alert('Vui lòng nhập mật khẩu và email để đăng nhập.');
                 return;
             }
 
