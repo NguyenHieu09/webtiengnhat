@@ -103,6 +103,7 @@ body {
     text-decoration: none;
     color: black;
     max-width: 100%;
+    margin-bottom: 10px;
 }
 
 .post-image {

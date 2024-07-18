@@ -45,10 +45,67 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
+// async function updateButtonContent(counts) {
+//     counts.forEach(item => {
+//         const type = item.type.toLowerCase();
+//         const count = item.total_posts;
+//         let iconClass = '';
+//         let typePost = '';
+
+//         // Ánh xạ từng loại bài viết với một icon cụ thể
+//         switch (type) {
+//             case 'kh':
+//                 iconClass = 'fa-book';
+//                 typePost = 'khóa học';
+//                 break;
+//             case 'dh':
+//                 iconClass = 'fa-plane';
+//                 typePost = 'du học';
+//                 break;
+//             case 'ks':
+//                 iconClass = 'fa-cogs';
+//                 typePost = 'kỹ sư';
+//                 break;
+//             case 'xkld':
+//                 iconClass = 'fa-briefcase';
+//                 typePost = 'xuất khẩu lao động';
+//                 break;
+//             case 'td':
+//                 iconClass = 'fa-user-tie';
+//                 typePost = 'tuyển dụng'
+//                 break;
+//             default:
+//                 iconClass = 'fa-question'; // Hoặc sử dụng một icon mặc định
+//                 break;
+//         }
+
+//         // Sử dụng querySelector để lấy nút button và cập nhật nội dung
+//         const button = document.querySelector(`#btn-${type}`);
+//         if (button) {
+//             button.innerHTML = `
+//                 <div>
+//                     <i class="fas ${iconClass}"></i>
+//                     <p>${count} bài viết ${typePost}</p>
+//                 </div>
+//                 <div class="post-info">
+//                     Thêm mới <i class="fas fa-arrow-right"></i>
+//                 </div>
+//             `;
+//         } else {
+//             console.error(`Button #btn-${type} not found`);
+//         }
+//     });
+// }
+
 async function updateButtonContent(counts) {
+    // Mặc định số lượng bài viết là 0 nếu không có dữ liệu
+    if (!counts || !Array.isArray(counts)) {
+        counts = [];
+    }
+
     counts.forEach(item => {
         const type = item.type.toLowerCase();
-        const count = item.total_posts;
+        const count = item.total_posts || 0; // Nếu không có bài viết, sử dụng số lượng là 0
         let iconClass = '';
         let typePost = '';
 
