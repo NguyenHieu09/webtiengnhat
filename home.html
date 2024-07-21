@@ -70,7 +70,7 @@
             </div>
             <div class="col-md-6">
                 <h4 class="text-center">Đăng Ký Tư Vấn Miễn Phí</h4>
-                <form class="mt-4">
+                <form id="consultationForm" class="mt-4">
                     <div class="mb-3">
                         <label for="topic" class="form-label">Chọn chủ đề bạn muốn nhận tư vấn *</label>
                         <select id="topic" class="form-select" required>
@@ -88,7 +88,7 @@
                         <input type="tel" class="form-control" id="phone" required placeholder="Nhập số điện thoại">
                     </div>
                     <div class="mb-3">
-                        <label for="city" class="form-label">Địa chỉ nơi bạn đang sống *</label>
+                        <label for="address" class="form-label">Địa chỉ nơi bạn đang sống *</label>
                         <input type="text" class="form-control" id="address" required placeholder="Nhập địa chỉ">
                     </div>
                     <div class="mb-3">
@@ -110,9 +110,11 @@
                         <span class="button-text">Gửi</span>
                     </button>
                 </form>
+
             </div>
         </div>
     </div>
+
     <div class="py-3 footer">
         <div class="row">
             <div class="col-md">

@@ -235,6 +235,95 @@ $(document).ready(function () {
                 });
         });
     }
+
+
+    // Hàm thiết lập menu
+    const typeMapping = {
+        'KH': 'Khóa học',
+        'DH': 'Du học',
+        'XKLD': 'Xuất khẩu lao động',
+        'KS': 'Kỹ sư',
+        'TD': 'Tuyển dụng'
+    };
+
+    const typeOrder = ['KH', 'DH', 'XKLD', 'KS', 'TD'];
+
+    function loadSubtypes(type) {
+        return fetch(`https://webtiengnhat-be.onrender.com/api/subtypes/${type}`)
+            .then(response => response.json())
+            .then(subtypes => subtypes.map(subtype => subtype.subtype))
+            .catch(error => {
+                console.error(`Error loading subtypes for type ${type}:`, error);
+                return [];
+            });
+    }
+
+    // function loadMenu() {
+    //     typeOrder.forEach(type => {
+    //         // const fullTypeName = typeMapping[type] || type;
+    //         const dropdownMenu = document.getElementById(type);
+
+    //         loadSubtypes(type).then(subtypes => {
+    //             dropdownMenu.innerHTML = '';  // Xóa các mục con cũ
+
+    //             subtypes.forEach(subtype => {
+    //                 const dropdownItem = document.createElement('li');
+    //                 const dropdownLink = document.createElement('a');
+    //                 dropdownLink.className = 'dropdown-item';
+    //                 dropdownLink.href = '#';
+    //                 dropdownLink.textContent = subtype;
+    //                 dropdownItem.appendChild(dropdownLink);
+    //                 dropdownMenu.appendChild(dropdownItem);
+    //             });
+    //         });
+    //     });
+    // }
+    function loadMenu() {
+        typeOrder.forEach(type => {
+            const dropdownMenu = document.getElementById(type);
+
+            loadSubtypes(type).then(subtypes => {
+                // dropdownMenu.innerHTML = '';  // Xóa các mục con cũ
+
+                subtypes.forEach(subtype => {
+                    const dropdownItem = document.createElement('li');
+                    const dropdownLink = document.createElement('a');
+                    dropdownLink.className = 'dropdown-item';
+                    dropdownLink.href = `posts-by-subtype.html?subtype=${encodeURIComponent(subtype)}`;
+                    dropdownLink.textContent = subtype;
+                    dropdownItem.appendChild(dropdownLink);
+                    dropdownMenu.appendChild(dropdownItem);
+                });
+            });
+        });
+    }
+
+
+    loadMenu();
+
+
+    $('#consultationForm').on('submit', function (e) {
+        e.preventDefault(); // Ngăn chặn hành vi gửi form mặc định
+
+        // Lấy giá trị của các trường input
+        const topic = $('#topic').val();
+        const name = $('#name').val();
+        const phone = $('#phone').val();
+        const address = $('#address').val();
+        const message = $('#message').val();
+
+        // Kiểm tra xem tất cả các trường đã được điền đầy đủ chưa
+        if (!topic || !name || !phone || !address || !message) {
+            // Nếu thiếu trường nào, hiển thị thông báo lỗi
+            alert('Vui lòng điền đầy đủ thông tin vào tất cả các trường.');
+        } else {
+            // Nếu tất cả các trường đã được điền đầy đủ
+            alert('Đăng ký tư vấn thành công!');
+
+            // Xóa nội dung form sau khi gửi thành công (tùy chọn)
+            $('#consultationForm')[0].reset();
+        }
+    });
 });
 
 
