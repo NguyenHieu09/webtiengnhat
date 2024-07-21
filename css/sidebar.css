@@ -75,13 +75,15 @@ body {
 /* CSS cho các bài post */
 
 /* Style cho mỗi bài post */
+/* CSS cho các bài post */
+
+/* Style cho mỗi bài post */
 .posts-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin-top: 20px;
 }
-
 
 .post {
     background: #f9f9f9;
@@ -94,8 +96,7 @@ body {
     /* align-items: center; */
     text-align: center;
     max-width: 250px;
-
-
+    /* Thay đổi kích thước để phù hợp với số cột */
 }
 
 .post-detail {
@@ -138,15 +139,35 @@ body {
     line-clamp: 3;
 }
 
-
-
-
-@media (min-width: 768px) {
+/* Các điểm phân cách để thay đổi số cột */
+@media (max-width: 1200px) {
     .posts-container {
-        grid-template-columns: repeat(6, 1fr);
-        /* 6 cột trên màn hình từ 768px trở lên */
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 cột trên màn hình nhỏ hơn 1200px */
     }
 }
+
+@media (max-width: 992px) {
+    .posts-container {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 cột trên màn hình nhỏ hơn 992px */
+    }
+}
+
+@media (max-width: 768px) {
+    .posts-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 cột trên màn hình nhỏ hơn 768px */
+    }
+}
+
+@media (max-width: 576px) {
+    .posts-container {
+        grid-template-columns: 1fr;
+        /* 1 cột trên màn hình nhỏ hơn 576px */
+    }
+}
+
 
 section h1 {
     display: flex;
